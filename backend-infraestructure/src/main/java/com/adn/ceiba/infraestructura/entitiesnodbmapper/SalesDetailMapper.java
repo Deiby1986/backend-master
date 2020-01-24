@@ -34,7 +34,7 @@ public class SalesDetailMapper {
 							   detail.getHeader()==null?0:detail.getHeader().getId(),							
 							   detail.getProduct()==null?"": detail.getProduct().getNombre(), 
 							   detail.getQtyPurchased(), 
-							   0D,
+							   detail.getProduct().getPrice(),
 							   detail.getTotal());		
 	}
 	
