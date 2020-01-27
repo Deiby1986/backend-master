@@ -11,40 +11,38 @@ import com.adn.ceiba.infraestructura.mongorepositorynodb.SalesHeaderMongoReposit
 public class SalesDetailMapper {
 	
 	ProductMongoRepository productRepository;
-	SalesHeaderMongoRepository headerRepository;
 	
 	
 	
-	public SalesDetailMapper(ProductMongoRepository productRepository, SalesHeaderMongoRepository headerRepository) {		
-		this.productRepository = productRepository;
-		this.headerRepository = headerRepository;
+	public SalesDetailMapper(ProductMongoRepository productRepository) {		
+		this.productRepository = productRepository;		
 	}
 
-	public static SalesDetail toSalesDetail(SalesDetailNoDB detail) {
+	public SalesDetail toSalesDetail(SalesDetailNoDB detail) {
+		ProductNoDB product = productRepository.findById(detail.getId()).orElse(new ProductNoDB(0L, "", "", 0D, 0L));
 		return new SalesDetail(detail.getId(),
-							   detail.getHeader().getId(), 
-							   detail.getProduct().getId(), 
-							   detail.getProduct().getNombre(), 
+							   detail.getHeader(), 
+							   product.getId(), 
+							   product.getNombre(), 
 							   detail.getQtyPurchased(), 
 							   detail.getTotal());
 	}
 	
-	public static SalesDetailDto toSalesDetailDto(SalesDetailNoDB detail) {
+	public SalesDetailDto toSalesDetailDto(SalesDetailNoDB detail) {
+		ProductNoDB product = productRepository.findById(detail.getId()).orElse(new ProductNoDB(0L, "", "", 0D, 0L));
 		return new SalesDetailDto(detail.getId(),
-							   detail.getHeader()==null?0:detail.getHeader().getId(),							
-							   detail.getProduct()==null?"": detail.getProduct().getNombre(), 
+							   detail.getHeader()==null?0:detail.getHeader(),							
+							   product.getNombre(), 
 							   detail.getQtyPurchased(), 
-							   detail.getProduct().getPrice(),
+							   product.getPrice(),
 							   detail.getTotal());		
 	}
 	
 	
-	public SalesDetailNoDB toSalesDetailNoDB(SalesDetail detail) {
-		ProductNoDB product = productRepository.findById(detail.getProductId()).orElse(null);
-		SalesHeaderNoDB header = headerRepository.findById(detail.getHeader()).orElse(null);
+	public SalesDetailNoDB toSalesDetailNoDB(SalesDetail detail) {		
 		return new SalesDetailNoDB(detail.getId(),
-							   header, 
-							   product,
+							   detail.getHeader(), 
+							   detail.getProductId(),
 							   detail.getQtyPurchased(), 
 							   detail.getTotal());
 	}

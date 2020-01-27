@@ -11,25 +11,26 @@ import com.adn.ceiba.domain.model.dto.SalesHeaderDto;
 import com.adn.ceiba.domain.repository.SalesHeaderRepository;
 import com.adn.ceiba.infraestructura.entitiesnodb.SalesHeaderNoDB;
 import com.adn.ceiba.infraestructura.entitiesnodbmapper.SalesHeaderMapper;
+import com.adn.ceiba.infraestructura.mongorepositorynodb.ProductMongoRepository;
 import com.adn.ceiba.infraestructura.mongorepositorynodb.SalesHeaderMongoRepository;
 
 @Profile("nodb")
 @Component
 public class SalesHeaderRepositoryNoDB implements SalesHeaderRepository{
 	
-	SalesHeaderMongoRepository salesHeaderRepository;
-	ProductRepositoryNoDB productRepository;
+	private SalesHeaderMongoRepository salesHeaderRepository;	
+	private SalesHeaderMapper mapper;
 	
 	
 
-	public SalesHeaderRepositoryNoDB(SalesHeaderMongoRepository salesHeaderRepository,ProductRepositoryNoDB productRepository) {
-		this.salesHeaderRepository = salesHeaderRepository;
-		this.productRepository = productRepository;
+	public SalesHeaderRepositoryNoDB(SalesHeaderMongoRepository salesHeaderRepository,ProductMongoRepository productRepository) {
+		this.salesHeaderRepository = salesHeaderRepository;		
+		this.mapper = new SalesHeaderMapper(productRepository);
 	}
 
 	@Override
 	public SalesHeader save(SalesHeader header) {		
-		SalesHeaderMapper mapper = new SalesHeaderMapper(productRepository);
+		
 		if(header.getId() == null || header.getId() <1)
 			header.setId(Long.MAX_VALUE-(long)(Math.random()*Long.MAX_VALUE));
 		return SalesHeaderMapper.toSalesHeader(salesHeaderRepository.save(mapper.toSalesHeaderNoDB(header)));
@@ -43,7 +44,7 @@ public class SalesHeaderRepositoryNoDB implements SalesHeaderRepository{
 	@Override
 	public List<SalesHeaderDto> findAllAsDto() {		
 		List<SalesHeaderNoDB> headers = salesHeaderRepository.findAll();		
-		return headers.stream().map(SalesHeaderMapper::toSalesHeaderDto).collect(Collectors.toList());
+		return headers.stream().map(header ->mapper.toSalesHeaderDto(header)).collect(Collectors.toList());
 	}
 
 }

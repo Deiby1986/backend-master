@@ -19,15 +19,15 @@ public class SalesDetailNoDB {
     @Id
 	private Long id;
 
-	private SalesHeaderNoDB header;
+	private Long header;
 
-	private ProductNoDB product;
+	private Long product;
 
 	private Long qtyPurchased;
 
 	private Long total;
 
-	public SalesDetailNoDB(Long id, SalesHeaderNoDB header, ProductNoDB product, Long qtyPurchased, Long total) {		
+	public SalesDetailNoDB(Long id, Long header, Long product, Long qtyPurchased, Long total) {		
 		this.id = id;
 		this.header = header;
 		this.product = product;

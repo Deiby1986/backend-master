@@ -31,7 +31,7 @@ public class BeanServicioNoDB {
 	}
 	
 	@Bean
-	public SalesHeaderService createHeaderService(SalesHeaderMongoRepository salesHeaderRepository,ProductRepositoryNoDB productRepository) {
+	public SalesHeaderService createHeaderService(SalesHeaderMongoRepository salesHeaderRepository,ProductMongoRepository productRepository) {
 		return new SalesHeaderService(new SalesHeaderRepositoryNoDB(salesHeaderRepository,productRepository));
 	}	
 }

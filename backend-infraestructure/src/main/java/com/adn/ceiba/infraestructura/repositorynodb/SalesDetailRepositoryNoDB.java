@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.adn.ceiba.domain.model.SalesDetail;
 import com.adn.ceiba.domain.model.dto.SalesDetailDto;
 import com.adn.ceiba.domain.repository.SalesDetailRepository;
+import com.adn.ceiba.infraestructura.entitiesnodb.ProductNoDB;
 import com.adn.ceiba.infraestructura.mongorepositorynodb.ProductMongoRepository;
 import com.adn.ceiba.infraestructura.mongorepositorynodb.SalesDetailMongoRepository;
 import com.adn.ceiba.infraestructura.mongorepositorynodb.SalesHeaderMongoRepository;
@@ -34,12 +35,15 @@ public class SalesDetailRepositoryNoDB implements SalesDetailRepository {
 	
 
 	@Override
-	public List<SalesDetailDto> findAll() {		
-		return detailRepository.findAll().stream().map(detail -> 
-															new SalesDetailDto(detail.getId(), detail.getHeader().getId(), 
-																				detail.getProduct().getNombre(), detail.getQtyPurchased(), 
-																				detail.getProduct().getPrice(), detail.getTotal()
-																			   )
+	public List<SalesDetailDto> findAll() {	
+		
+		return detailRepository.findAll().stream().map(detail -> {
+															ProductNoDB product= productRepository.findById(detail.getId()).orElse(new ProductNoDB(0L, "", "", 0D, 0L));
+															return new SalesDetailDto(detail.getId(), detail.getHeader(), 
+																				product.getNombre(), detail.getQtyPurchased(), 
+																				product.getPrice(), detail.getTotal()
+																			   );
+															}
 												).collect(Collectors.toList());
 	}
 

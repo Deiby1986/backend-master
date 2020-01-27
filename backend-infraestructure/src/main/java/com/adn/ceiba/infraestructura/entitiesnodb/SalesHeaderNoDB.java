@@ -9,7 +9,7 @@ import lombok.Getter;
 
 
 @Getter
-@Document(collection = "header")
+@Document(collection = "sales")
 public class SalesHeaderNoDB{
 	
 	@Id
