@@ -20,8 +20,9 @@ public class ProductNoDB {
 	
 	private Long qty;
 
-	public ProductNoDB(Long id, String codigo, String nombre, Double price, Long qty) {
-		super();
+	public ProductNoDB(Long id, String codigo, String nombre, Double price, Long qty) {	
+		if(id < 1)
+			id = SequenceNoDB.generateSequence("product_sequence");
 		this.id = id;
 		this.codigo = codigo;
 		this.nombre = nombre;

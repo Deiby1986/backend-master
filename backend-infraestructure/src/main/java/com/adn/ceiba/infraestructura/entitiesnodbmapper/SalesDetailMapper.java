@@ -19,7 +19,7 @@ public class SalesDetailMapper {
 	}
 
 	public SalesDetail toSalesDetail(SalesDetailNoDB detail) {
-		ProductNoDB product = productRepository.findById(detail.getId()).orElse(new ProductNoDB(0L, "", "", 0D, 0L));
+		ProductNoDB product = productRepository.findById(detail.getId()).orElse(new ProductNoDB(1L, "", "", 0D, 0L));
 		return new SalesDetail(detail.getId(),
 							   detail.getHeader(), 
 							   product.getId(), 
@@ -29,7 +29,7 @@ public class SalesDetailMapper {
 	}
 	
 	public SalesDetailDto toSalesDetailDto(SalesDetailNoDB detail) {
-		ProductNoDB product = productRepository.findById(detail.getId()).orElse(new ProductNoDB(0L, "", "", 0D, 0L));
+		ProductNoDB product = productRepository.findById(detail.getId()).orElse(new ProductNoDB(1L, "", "", 0D, 0L));
 		return new SalesDetailDto(detail.getId(),
 							   detail.getHeader()==null?0:detail.getHeader(),							
 							   product.getNombre(), 

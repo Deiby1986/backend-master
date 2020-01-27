@@ -1,5 +1,9 @@
 package com.adn.ceiba.infraestructura.config;
 
+import java.util.logging.Logger;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,6 +20,7 @@ import com.adn.ceiba.domain.repository.SalesHeaderRepository;
 import com.adn.ceiba.domain.services.ProductService;
 import com.adn.ceiba.domain.services.SalesDetailService;
 import com.adn.ceiba.domain.services.SalesHeaderService;
+import com.adn.ceiba.infraestructura.entitiesnodb.SequenceNoDB;
 
 @Configuration
 public class BeanServicio {
@@ -54,5 +59,14 @@ public class BeanServicio {
 	@Bean
 	public SalesDetailFactory createSalesDetailFactory(SalesHeaderRepository salesHeaderRepository, ProductRepository productRepository) {
 		return new SalesDetailFactory(salesHeaderRepository,productRepository);
+	}
+	
+	
+	@Bean
+	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+		return args -> {
+			Logger.getAnonymousLogger().info("Let's inspect the beans provided by Spring Boot:");
+			SequenceNoDB.setMongoOperations(ctx);
+		};
 	}
 }

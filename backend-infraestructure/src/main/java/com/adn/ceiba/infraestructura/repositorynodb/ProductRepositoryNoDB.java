@@ -41,9 +41,7 @@ public class ProductRepositoryNoDB implements ProductRepository {
 	}
 
 	@Override
-	public Product save(Product product) {
-		if(product.getId() == null || product.getId() <1)
-			product.setId(Long.MAX_VALUE-1);
+	public Product save(Product product) {		
 		return ProductMapper.toProduct(repository.save(ProductMapper.toProductMongo(product)));
 	}
 

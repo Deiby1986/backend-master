@@ -30,9 +30,6 @@ public class SalesHeaderRepositoryNoDB implements SalesHeaderRepository{
 
 	@Override
 	public SalesHeader save(SalesHeader header) {		
-		
-		if(header.getId() == null || header.getId() <1)
-			header.setId(Long.MAX_VALUE-(long)(Math.random()*Long.MAX_VALUE));
 		return SalesHeaderMapper.toSalesHeader(salesHeaderRepository.save(mapper.toSalesHeaderNoDB(header)));
 	}
 

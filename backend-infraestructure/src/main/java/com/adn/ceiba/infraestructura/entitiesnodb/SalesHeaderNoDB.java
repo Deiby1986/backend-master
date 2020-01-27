@@ -28,7 +28,8 @@ public class SalesHeaderNoDB{
 	
 
 	public SalesHeaderNoDB(Long id, String clientName, String date, Double total) {
-		super();
+		if(id < 1)
+			id = SequenceNoDB.generateSequence("sales_sequence");
 		this.id = id;
 		this.clientName = clientName;
 		this.date = date;
@@ -37,7 +38,8 @@ public class SalesHeaderNoDB{
 
 
 	public SalesHeaderNoDB(Long id, String clientName, String date, Double total, List<SalesDetailNoDB> details) {
-		super();
+		if(id < 1)
+			id = SequenceNoDB.generateSequence("sales_sequence");
 		this.id = id;
 		this.clientName = clientName;
 		this.date = date;
