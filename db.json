@@ -2,6 +2,6 @@
   "Category": [
     { "id": 1, "code": "PLOM", "name": "Plomeria", "Description": "Servicio de plomeria en general", "parentCategory": "0","enabled": "true" },
     { "id": 2, "code": "ACARR", "name": "Acarreos", "Description": "Servicio de viajes y mudanzas", "parentCategory": "0","enabled": "true" },
-    { "id": 3, "code": "EXTR", "name": "Recarga de extintores", "Description": "Servicio de recarga de extintores", "parentCategory": "0","enabled": "true" }
+    { "id": 3, "code": "EXTR", "name": "Recarga de extintores", "Description": "Servicio de recarga de extintores", "parentCategory": "0","enabled": "true" },
   ]
 }
