@@ -1,0 +1,19 @@
+{
+  "Category": [
+    { "id": 1, "code": "PLOM", "name": "Plomeria", "Description": "Servicio de plomeria en general", "parentCategory": "0","enabled": "true" },
+    { "id": 2, "code": "ACARR", "name": "Acarreos", "Description": "Servicio de viajes y mudanzas", "parentCategory": "0","enabled": "true" },
+    { "id": 3, "code": "EXTR", "name": "Recarga de extintores", "Description": "Servicio de recarga de extintores", "parentCategory": "0","enabled": "true" },
+  ],
+  "Usuarios": [
+    { "id": 1, "documentType": "CEDULA", "documentNumber": "12346789", "firstName": "Ramon", "middleName": "Alfredo","lastName":"Perez Morelos","countryId":"1","userName":"ramonperez@gmail.com",categories:[1,2], habilities:[1,2,3,4] },
+    { "id": 2, "documentType": "CEDULA", "documentNumber": "12376589", "firstName": "Pedro", "middleName": "Luis","lastName":"Perez","countryId":"1","userName":"pedroperez@gmail.com",categories:[3,2], habilities:[1,2,3,4] },
+  ],
+  
+  "Request": [
+    { "id": 1, "description": "Quiero lavar mi carro", "requestDate": "24/05/2020 10:00 am", "notes": "Estuve en la finca y mi carro está lleno de tierra. Quiero que saber donde le puedo hacer un baño de grafito", "location": "6.172236, -75.610638","RequestMakerUser":"1","ServiceProviderUser":"null","status":1 },
+    { "id": 1, "documentType": "CEDULA", "documentNumber": "12376589", "firstName": "Pedro", "middleName": "Luis","lastName":"Perez","countryId":"1","userName":"pedroperez@gmail.com",categories:[3,2], habilities:[1,2,3,4] },
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
